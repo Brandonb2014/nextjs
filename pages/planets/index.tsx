@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import useSWR from 'swr';
-import Layout from '../../components/layout';
 import { useRouter } from "next/router";
 
 const fetcher = async (url: string) => {
@@ -28,31 +27,16 @@ export default function PlanetsList({
     
   if (error) return (
     <div>
-
-      <Layout title="Planet Details">
-        <div>Planets</div>
-      </Layout>
-
       {error.message}
     </div>
   )
   if (!data) return (
     <div>
-
-      <Layout title="Planet Details">
-        <div>Planets</div>
-      </Layout>
-
       Loading...
     </div>
   )
   return (
     <div>
-
-      <Layout title="Planets List">
-        <div>Planets</div>
-      </Layout>
-
       <div>
         {data.results.map((planet) => (
           <>
