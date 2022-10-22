@@ -62,7 +62,7 @@ export default function PlanetsList({
           </>
         ))}
       </div>
-      <Link href='/planets' back={data.next}>Next</Link>
+      <Link href='/planets'>Next</Link>
 
     </div>
   )

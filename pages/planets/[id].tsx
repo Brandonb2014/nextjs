@@ -51,7 +51,7 @@ export default function Planet({
         <div>Planets</div>
       </Layout>
 
-      <Link href='/planets' url={backUrl}>Back</Link>
+      <Link href='/planets'>Back</Link>
 
       <div>
         <span>Name: </span>
