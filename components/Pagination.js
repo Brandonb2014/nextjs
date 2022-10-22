@@ -25,7 +25,7 @@ function NextPage(currentPage, pageNumbers) {
   )
 }
 
-const Pagination = ({ totalPosts, paginate }) => {
+const Pagination = ({ pathName, totalPosts, paginate }) => {
   const pageNumbers = [];
   const currentPage = parseInt(paginate.page);
 
@@ -37,7 +37,7 @@ const Pagination = ({ totalPosts, paginate }) => {
     <nav>
       {PreviousPage(currentPage)}
       {pageNumbers.map(number => (
-        <Link key={number} href={{ pathname: '/planets', query: { page: number } }}>
+        <Link key={number} href={{ pathname: pathName, query: { page: number } }}>
           {number}
         </Link>
       ))}

@@ -17,11 +17,13 @@ export default function Navbar({
           {' '}
           <Link href={{ pathname: '/planets', query: { page: 1 } }}>
             <a>Planets</a>
-          </Link>{' '}
-          {/* |
-          <Link href="/people">
+          </Link>
+          {' '}
+          |
+          {' '}
+          <Link href={{ pathname: '/people', query: { page: 1 } }}>
             <a>People</a>
-          </Link> */}
+          </Link>
         </nav>
       </header>
 

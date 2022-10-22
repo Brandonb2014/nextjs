@@ -14,10 +14,10 @@ const fetcher = async (url: string) => {
   return data;
 }
 
-export default function PlanetsList() {
+export default function PeopleList() {
   const router = useRouter();
   const page = router.query.page;
-  const pageName = 'planets';
+  const pageName = 'people';
   const pageNameDash = pageName + '/';
   const { data, error } = useSWR(
     () => 'https://swapi.dev/api/' + pageName + '/?page=' + page,
@@ -38,13 +38,13 @@ export default function PlanetsList() {
   return (
     <div>
       <div>
-        {data.results.map((planet) => (
+        {data.results.map((person) => (
           <>
             <Link
-              href={'/' + pageNameDash + planet.url.substr(planet.url.indexOf(pageNameDash) + pageNameDash.length)}
-              key={planet.url.substr(planet.url.indexOf(pageNameDash) + pageNameDash.length)}
+              href={'/' + pageNameDash + person.url.substr(person.url.indexOf(pageNameDash) + pageNameDash.length)}
+              key={person.url.substr(person.url.indexOf(pageNameDash) + pageNameDash.length)}
             >
-              {planet.name}
+              {person.name}
             </Link>
           </>
         ))}

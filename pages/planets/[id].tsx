@@ -1,40 +1,41 @@
 import { useRouter } from "next/router";
-import Link from 'next/link';
-import Head from 'next/head';
 import useSWR from 'swr';
 
 const fetcher = async (url: string) => {
-  const res = await fetch(url)
-  const data = await res.json()
+  const res = await fetch(url);
+  const data = await res.json();
 
   if (res.status !== 200) {
-    throw new Error(data.message)
+    throw new Error(data.message);
   }
-  return data
+  return data;
 }
 
 export default function Planet() {
-  const { query } = useRouter()
+  const { query } = useRouter();
   const { data, error } = useSWR(
     () => `https://swapi.dev/api/planets/${query.id}`,
     fetcher
-  )
+  );
     
-  if (error) return (
-    <div>
-      {error.message}
-    </div>
-  )
-  if (!data) return (
-    <div>
-      Loading...
-    </div>
-  )
+  if (error) {
+    return (
+      <div>
+        {error.message}
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div>
+        Loading...
+      </div>
+    );
+  }
   
   return (
     <div>
-      <Link href='/planets'>Back</Link>
-
       <div>
         <span>Name: </span>
         <span>{data.name}</span>
@@ -68,5 +69,5 @@ export default function Planet() {
         <span>{data.rotation_period}</span>
       </div>
     </div>
-  )
+  );
 }
