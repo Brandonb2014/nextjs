@@ -13,9 +13,7 @@ const fetcher = async (url: string) => {
   return data
 }
 
-export default function Planet({
-  backUrl = 'https://swapi.dev/api/planets/?page=1'
-}) {
+export default function Planet() {
   const { query } = useRouter()
   const { data, error } = useSWR(
     () => `https://swapi.dev/api/planets/${query.id}`,

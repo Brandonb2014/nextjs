@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import useSWR from 'swr';
 import { useRouter } from "next/router";
+import Pagination from '../../components/Pagination';
 
 const fetcher = async (url: string) => {
   const res = await fetch(url);
@@ -10,18 +11,15 @@ const fetcher = async (url: string) => {
     throw new Error(data.message);
   }
 
-  console.log('data:', data);
   return data;
 }
 
-export default function PlanetsList({
-  url = 'https://swapi.dev/api/planets/?page=1'
-}) {
+export default function PlanetsList() {
   const router = useRouter();
+  const page = router.query.page;
   console.log('router:', router);
-  console.log('url:', url);
   const { data, error } = useSWR(
-    () => url,
+    () => 'https://swapi.dev/api/planets/?page=' + page,
     fetcher
   )
     
@@ -35,6 +33,7 @@ export default function PlanetsList({
       Loading...
     </div>
   )
+
   return (
     <div>
       <div>
@@ -46,8 +45,8 @@ export default function PlanetsList({
           </>
         ))}
       </div>
-      <Link href='/planets'>Next</Link>
 
+      <Pagination totalPosts={data.count} paginate={{page}} />
     </div>
   )
 }

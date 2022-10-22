@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import Head from 'next/head'
+import Link from 'next/link';
+import Head from 'next/head';
 
 export default function Navbar({
   children,
@@ -7,11 +7,6 @@ export default function Navbar({
 }) {
   return (
     <div>
-      {/* <Head>
-        <title>{title}</title>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head> */}
       <header>
         <nav>
           <Link href="/">
@@ -20,7 +15,7 @@ export default function Navbar({
           {' '}
           |
           {' '}
-          <Link href="/planets">
+          <Link href={{ pathname: '/planets', query: { page: 1 } }}>
             <a>Planets</a>
           </Link>{' '}
           {/* |

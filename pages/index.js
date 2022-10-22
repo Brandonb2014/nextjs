@@ -8,7 +8,7 @@ export default function Home() {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <p className="text-3xl font-bold underline">
+      <p className="text-3xl font-bold">
         Welcome to the SWAPI-dia!
       </p>
     </div>
