@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Head from 'next/head';
+import Loading from '../../components/Loading';
 
 type peopleDetailResponse = {
   birth_year: string,
@@ -40,19 +41,27 @@ export default function People() {
     fetcher
   );
 
-  if (error) return (
-    <div>
-      {error.message}
-    </div>
-  )
-  if (!data) return (
-    <div>
-      Loading...
-    </div>
-  )
+  if (error) {
+    return (
+      <div className='min-h-screen flex justify-center pt-96 text-3xl'>
+        {error.message}
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <Loading />
+    );
+  }
   
   return (
     <div>
+      <Head>
+        <title>{data.name}</title>
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+      </Head>
       <div>
         <span>Name: </span>
         <span>{data.name}</span>

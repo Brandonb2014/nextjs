@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
 import useSWR from 'swr';
+import Head from 'next/head';
+import Loading from '../../components/Loading';
 
 type planetDetailResponse = {
   climate: string,
@@ -38,7 +40,7 @@ export default function Planet() {
     
   if (error) {
     return (
-      <div>
+      <div className='min-h-screen flex justify-center pt-96 text-3xl'>
         {error.message}
       </div>
     );
@@ -46,14 +48,17 @@ export default function Planet() {
 
   if (!data) {
     return (
-      <div>
-        Loading...
-      </div>
+      <Loading />
     );
   }
   
   return (
     <div>
+      <Head>
+        <title>{data.name}</title>
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+      </Head>
       <div>
         <span>Name: </span>
         <span>{data.name}</span>
