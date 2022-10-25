@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 
 export default function Navbar() {
   const router = useRouter();
+  console.log('router:', router);
 
   return (
     <div className='bg-zinc-200'>
@@ -16,13 +17,13 @@ export default function Navbar() {
             </span>
           </Link>
           <Link href={{ pathname: '/planets', query: { page: 1 } }}>
-            <span className={'flex flex-col hover:bg-slate-400 cursor-pointer p-2 mt-1' + (router.pathname == '/planets' ? ' active' : '')}>
+            <span className={'flex flex-col hover:bg-slate-400 cursor-pointer p-2 mt-1' + (router.pathname.includes('/planets') ? ' active' : '')}>
               <Image src='/planet.png' alt='' width={50} height={50} />
               <a>Planets</a>
             </span>
           </Link>
           <Link href={{ pathname: '/people', query: { page: 1 } }}>
-            <span className={'flex flex-col hover:bg-slate-400 cursor-pointer p-2 mt-1' + (router.pathname == '/people' ? ' active' : '')}>
+            <span className={'flex flex-col hover:bg-slate-400 cursor-pointer p-2 mt-1' + (router.pathname.includes('/people') ? ' active' : '')}>
               <Image src='/people.png' alt='' width={50} height={50} />
               <a>People</a>
             </span>
