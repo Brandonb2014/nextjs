@@ -1,9 +1,27 @@
 import { useRouter } from "next/router";
 import useSWR from 'swr';
 
+type planetDetailResponse = {
+  climate: string,
+  created: string,
+  diameter: string,
+  edited: string,
+  films: [string],
+  gravity: string,
+  name: string,
+  orbital_period: string,
+  population: string,
+  residents: [string],
+  rotation_period: string,
+  surface_water: string,
+  terrain: string,
+  url: string,
+  message: string
+};
+
 const fetcher = async (url: string) => {
   const res = await fetch(url);
-  const data = await res.json();
+  const data: planetDetailResponse = await res.json();
 
   if (res.status !== 200) {
     throw new Error(data.message);

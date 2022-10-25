@@ -5,9 +5,17 @@ import Head from 'next/head';
 import Pagination from '../../components/Pagination';
 import Loading from '../../components/Loading';
 
+type planetResponse = {
+  count: number,
+  next: string,
+  previous: string,
+  results: [string],
+  message: string
+};
+
 const fetcher = async (url: string) => {
   const res = await fetch(url);
-  const data = await res.json();
+  const data: planetResponse = await res.json();
 
   if (res.status !== 200) {
     throw new Error(data.message);
@@ -19,8 +27,8 @@ const fetcher = async (url: string) => {
 export default function PlanetsList() {
   const router = useRouter();
   const page = router.query.page;
-  const pageName = 'planets';
-  const pageNameDash = pageName + '/';
+  const pageName: string = 'planets';
+  const pageNameDash: string = pageName + '/';
   const { data, error } = useSWR(
     () => 'https://swapi.dev/api/' + pageName + '/?page=' + page,
     fetcher

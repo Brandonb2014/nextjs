@@ -5,9 +5,17 @@ import Head from 'next/head';
 import Pagination from '../../components/Pagination';
 import Loading from '../../components/Loading';
 
+type peopleResponse = {
+  count: number,
+  next: string,
+  previous: string,
+  results: [string],
+  message: string
+};
+
 const fetcher = async (url: string) => {
   const res = await fetch(url);
-  const data = await res.json();
+  const data: peopleResponse = await res.json();
 
   if (res.status !== 200) {
     throw new Error(data.message);
@@ -19,13 +27,13 @@ const fetcher = async (url: string) => {
 export default function PeopleList() {
   const router = useRouter();
   const page = router.query.page;
-  const pageName = 'people';
-  const pageNameDash = pageName + '/';
+  const pageName: string = 'people';
+  const pageNameDash: string = pageName + '/';
   const { data, error } = useSWR(
     () => 'https://swapi.dev/api/' + pageName + '/?page=' + page,
     fetcher
   );
-    
+
   if (error) {
     return (
       <div className='min-h-screen flex justify-center pt-96 text-3xl'>

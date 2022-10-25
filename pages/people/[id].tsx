@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Head from 'next/head';
 
-type peopleResponse = {
+type peopleDetailResponse = {
   birth_year: string,
   created: string,
   edited: string,
@@ -24,7 +24,7 @@ type peopleResponse = {
 
 const fetcher = async (url: string) => {
   const res = await fetch(url);
-  const data: peopleResponse = await res.json();
+  const data: peopleDetailResponse = await res.json();
 
   if (res.status !== 200) {
     throw new Error(data.message);
@@ -34,6 +34,7 @@ const fetcher = async (url: string) => {
 
 export default function People() {
   const { query } = useRouter();
+
   const { data, error } = useSWR(
     () => `https://swapi.dev/api/people/${query.id}`,
     fetcher
