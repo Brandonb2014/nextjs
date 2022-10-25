@@ -34,7 +34,7 @@ const fetcher = async (url: string) => {
 export default function Planet() {
   const { query } = useRouter();
   const router = useRouter();
-  
+
   const { data, error } = useSWR(
     () => `https://swapi.dev/api/planets/${query.id}`,
     fetcher
@@ -61,7 +61,7 @@ export default function Planet() {
         <meta charSet='utf-8' />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <span className='text-2xl'><span onClick={() => router.back()} className='text-xl hover:text-sky-400 cursor-pointer'>Planets</span> >> {data.name}</span>
+      <span className='text-2xl'><span onClick={() => router.back()} className='text-xl hover:text-sky-400 cursor-pointer'>Planets</span> &gt;&gt; {data.name}</span>
       <div className='flex items-center flex-col text-2xl py-5'>
         <div>
           <span>Name: </span>
