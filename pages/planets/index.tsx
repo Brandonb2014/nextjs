@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
-import Pagination from '../../components/Pagination';
 import Head from 'next/head';
+import Pagination from '../../components/Pagination';
 import Loading from '../../components/Loading';
 
 const fetcher = async (url: string) => {
@@ -26,14 +26,19 @@ export default function PlanetsList() {
     fetcher
   );
 
-  if (error) return (
-    <div className='min-h-screen flex justify-center pt-96 text-3xl'>
-      {error.message}
-    </div>
-  )
-  if (!data) return (
-    <Loading />
-  )
+  if (error) {
+    return (
+      <div className='min-h-screen flex justify-center pt-96 text-3xl'>
+        {error.message}
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <Loading />
+    );
+  }
 
   return (
     <div className='min-h-screen'>
@@ -58,5 +63,5 @@ export default function PlanetsList() {
 
       <Pagination pathName={'/' + pageName} totalPosts={data.count} paginate={{page}} />
     </div>
-  )
+  );
 }
