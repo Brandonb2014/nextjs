@@ -7,9 +7,7 @@ function PreviousPage(currentPage) {
   }
 
   return (
-    <Link href={{ pathname: '/planets', query: { page: currentPage - 1 } }}>
-      <a className='hover:text-sky-400'>Previous</a>
-    </Link>
+    <a className='hover:text-sky-400'>Previous</a>
   );
 }
 
@@ -19,9 +17,7 @@ function NextPage(currentPage, pageNumbers) {
   }
 
   return (
-    <Link href={{ pathname: '/planets', query: { page: currentPage + 1 } }}>
-      <a className='hover:text-sky-400'>Next</a>
-    </Link>
+    <a className='hover:text-sky-400'>Next</a>
   );
 }
 
@@ -35,13 +31,19 @@ const Pagination = ({ pathName, totalPosts, paginate }) => {
 
   return (
     <nav className='flex justify-center text-3xl'>
-      {PreviousPage(currentPage)}
-      {pageNumbers.map(number => (
-        <Link key={number} href={{ pathname: pathName, query: { page: number } }}>
-          <a className='mx-5 hover:text-sky-400'>{number}</a>
+      <>
+        <Link href={{ pathname: pathName, query: { page: currentPage - 1 } }}>
+          {PreviousPage(currentPage)}
         </Link>
-      ))}
-      {NextPage(currentPage, pageNumbers.length)}
+        {pageNumbers.map(number => (
+          <Link key={number} href={{ pathname: pathName, query: { page: number } }}>
+            <a className='mx-5 hover:text-sky-400'>{number}</a>
+          </Link>
+        ))}
+        <Link href={{ pathname: pathName, query: { page: currentPage + 1 } }}>
+          {NextPage(currentPage, pageNumbers.length)}
+        </Link>
+      </>
     </nav>
   );
 }
