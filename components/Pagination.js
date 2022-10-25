@@ -37,7 +37,7 @@ const Pagination = ({ pathName, totalPosts, paginate }) => {
         </Link>
         {pageNumbers.map(number => (
           <Link key={number} href={{ pathname: pathName, query: { page: number } }}>
-            <a className='mx-5 hover:text-sky-400'>{number}</a>
+            <a className={(number === currentPage ? 'text-sky-400 ' : '') + 'mx-5 hover:text-sky-400'}>{number}</a>
           </Link>
         ))}
         <Link href={{ pathname: pathName, query: { page: currentPage + 1 } }}>
