@@ -75,16 +75,16 @@ export default function PeopleList() {
         <meta charSet='utf-8' />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <p className='text-3xl flex justify-center py-5'>
+      <p className='md:text-3xl text-lg flex justify-center py-5'>
         Click a name to get more information.
       </p>
-      <div className='flex justify-center text-2xl'>
+      <div className='flex justify-center flex-wrap md:text-2xl py-5'>
         {data.results.map((person) => (
           <Link
             href={'/' + pageNameDash + person.url.substr(person.url.indexOf(pageNameDash) + pageNameDash.length)}
             key={person.url.substr(person.url.indexOf(pageNameDash) + pageNameDash.length)}
           >
-            <a className='m-5 hover:text-sky-400'>{person.name}</a>
+            <a className='md:m-5 m-2 hover:text-sky-400'>{person.name}</a>
           </Link>
         ))}
       </div>

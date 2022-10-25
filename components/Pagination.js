@@ -30,14 +30,14 @@ const Pagination = ({ pathName, totalPosts, paginate }) => {
   }
 
   return (
-    <nav className='flex justify-center text-3xl'>
+    <nav className='flex justify-center md:text-3xl'>
       <>
         <Link href={{ pathname: pathName, query: { page: currentPage - 1 } }}>
           {PreviousPage(currentPage)}
         </Link>
         {pageNumbers.map(number => (
           <Link key={number} href={{ pathname: pathName, query: { page: number } }}>
-            <a className={(number === currentPage ? 'text-sky-400 ' : '') + 'mx-5 hover:text-sky-400'}>{number}</a>
+            <a className={(number === currentPage ? 'text-sky-400 ' : '') + 'md:mx-5 mx-2 hover:text-sky-400'}>{number}</a>
           </Link>
         ))}
         <Link href={{ pathname: pathName, query: { page: currentPage + 1 } }}>

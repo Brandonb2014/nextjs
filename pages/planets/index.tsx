@@ -74,16 +74,16 @@ export default function PlanetsList() {
         <meta charSet='utf-8' />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <p className='text-3xl flex justify-center py-5'>
+      <p className='md:text-3xl text-lg flex justify-center py-5'>
         Click a planet to get more information.
       </p>
-      <div className='flex justify-center text-2xl'>
+      <div className='flex justify-center flex-wrap md:text-2xl py-5'>
         {data.results.map((planet) => (
           <Link
             href={'/' + pageNameDash + planet.url.substr(planet.url.indexOf(pageNameDash) + pageNameDash.length)}
             key={planet.url.substr(planet.url.indexOf(pageNameDash) + pageNameDash.length)}
           >
-            <a className='m-5 hover:text-sky-400'>{planet.name}</a>
+            <a className='md:m-5 m-2 hover:text-sky-400'>{planet.name}</a>
           </Link>
         ))}
       </div>
