@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import useSWR from 'swr';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import Pagination from '../../components/Pagination';
 
 const fetcher = async (url: string) => {
@@ -22,7 +22,7 @@ export default function PeopleList() {
   const { data, error } = useSWR(
     () => 'https://swapi.dev/api/' + pageName + '/?page=' + page,
     fetcher
-  )
+  );
     
   if (error) return (
     <div>
@@ -52,5 +52,5 @@ export default function PeopleList() {
 
       <Pagination pathName={'/' + pageName} totalPosts={data.count} paginate={{page}} />
     </div>
-  )
+  );
 }

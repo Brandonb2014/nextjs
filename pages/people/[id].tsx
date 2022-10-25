@@ -1,23 +1,44 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import useSWR from 'swr';
+import Head from 'next/head';
+
+type peopleResponse = {
+  birth_year: string,
+  created: string,
+  edited: string,
+  eye_color: string,
+  films: [string],
+  gender: string,
+  hair_color: string,
+  height: string,
+  homeworld: string,
+  mass: string,
+  name: string,
+  skin_color: string,
+  species: [string],
+  starships: [string],
+  url: string,
+  vehicles: [string],
+  message: string
+};
 
 const fetcher = async (url: string) => {
-  const res = await fetch(url)
-  const data = await res.json()
+  const res = await fetch(url);
+  const data: peopleResponse = await res.json();
 
   if (res.status !== 200) {
-    throw new Error(data.message)
+    throw new Error(data.message);
   }
-  return data
+  return data;
 }
 
 export default function People() {
-  const { query } = useRouter()
+  const { query } = useRouter();
   const { data, error } = useSWR(
     () => `https://swapi.dev/api/people/${query.id}`,
     fetcher
-  )
-    
+  );
+
   if (error) return (
     <div>
       {error.message}
@@ -64,5 +85,5 @@ export default function People() {
         <span>{data.gender}</span>
       </div>
     </div>
-  )
+  );
 }

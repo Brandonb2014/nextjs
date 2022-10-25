@@ -1,33 +1,34 @@
 import Link from 'next/link';
-import Head from 'next/head';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
-export default function Navbar({
-  children,
-  title = 'SWAPI-dia',
-}) {
+export default function Navbar() {
+  const router = useRouter();
+
   return (
-    <div>
+    <div className='bg-zinc-200'>
       <header>
-        <nav>
-          <Link href="/">
-            <a>Home</a>
+        <nav className='flex justify-center'>
+          <Link href='/'>
+            <span className={'flex flex-col hover:bg-slate-400 cursor-pointer p-2 mt-1' + (router.pathname == '/' ? ' active' : '')}>
+              <Image src='/home.png' alt='' width={50} height={50} />
+              <a>Home</a>
+            </span>
           </Link>
-          {' '}
-          |
-          {' '}
           <Link href={{ pathname: '/planets', query: { page: 1 } }}>
-            <a>Planets</a>
+            <span className={'flex flex-col hover:bg-slate-400 cursor-pointer p-2 mt-1' + (router.pathname == '/planets' ? ' active' : '')}>
+              <Image src='/planet.png' alt='' width={50} height={50} />
+              <a>Planets</a>
+            </span>
           </Link>
-          {' '}
-          |
-          {' '}
           <Link href={{ pathname: '/people', query: { page: 1 } }}>
-            <a>People</a>
+            <span className={'flex flex-col hover:bg-slate-400 cursor-pointer p-2 mt-1' + (router.pathname == '/people' ? ' active' : '')}>
+              <Image src='/people.png' alt='' width={50} height={50} />
+              <a>People</a>
+            </span>
           </Link>
         </nav>
       </header>
-
-      <h1>{children}</h1>
     </div>
-  )
+  );
 }

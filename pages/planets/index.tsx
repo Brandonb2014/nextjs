@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import useSWR from 'swr';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import Pagination from '../../components/Pagination';
+import Head from 'next/head';
 
 const fetcher = async (url: string) => {
   const res = await fetch(url);
@@ -22,7 +23,7 @@ export default function PlanetsList() {
   const { data, error } = useSWR(
     () => 'https://swapi.dev/api/' + pageName + '/?page=' + page,
     fetcher
-  )
+  );
     
   if (error) return (
     <div>
@@ -37,6 +38,11 @@ export default function PlanetsList() {
 
   return (
     <div>
+      <Head>
+        <title>Planets</title>
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+      </Head>
       <div>
         {data.results.map((planet) => (
           <>
