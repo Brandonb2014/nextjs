@@ -33,6 +33,8 @@ const fetcher = async (url: string) => {
 
 export default function Planet() {
   const { query } = useRouter();
+  const router = useRouter();
+  
   const { data, error } = useSWR(
     () => `https://swapi.dev/api/planets/${query.id}`,
     fetcher
@@ -53,43 +55,46 @@ export default function Planet() {
   }
   
   return (
-    <div>
+    <div className='min-h-screen'>
       <Head>
         <title>{data.name}</title>
         <meta charSet='utf-8' />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <div>
-        <span>Name: </span>
-        <span>{data.name}</span>
-      </div>
-      <div>
-        <span>Climate: </span>
-        <span>{data.climate}</span>
-      </div>
-      <div>
-        <span>Surface Water: </span>
-        <span>{data.surface_water}</span>
-      </div>
-      <div>
-        <span>Terrain: </span>
-        <span>{data.terrain}</span>
-      </div>
-      <div>
-        <span>Diameter: </span>
-        <span>{data.diameter}</span>
-      </div>
-      <div>
-        <span>Gravity: </span>
-        <span>{data.gravity}</span>
-      </div>
-      <div>
-        <span>Orbital Period: </span>
-        <span>{data.orbital_period}</span>
-      </div>
-      <div>
-        <span>Rotation Period: </span>
-        <span>{data.rotation_period}</span>
+      <span className='text-2xl'><span onClick={() => router.back()} className='text-xl hover:text-sky-400 cursor-pointer'>Planets</span> >> {data.name}</span>
+      <div className='flex items-center flex-col text-2xl py-5'>
+        <div>
+          <span>Name: </span>
+          <span>{data.name}</span>
+        </div>
+        <div>
+          <span>Climate: </span>
+          <span>{data.climate}</span>
+        </div>
+        <div>
+          <span>Surface Water: </span>
+          <span>{data.surface_water}</span>
+        </div>
+        <div>
+          <span>Terrain: </span>
+          <span>{data.terrain}</span>
+        </div>
+        <div>
+          <span>Diameter: </span>
+          <span>{data.diameter}</span>
+        </div>
+        <div>
+          <span>Gravity: </span>
+          <span>{data.gravity}</span>
+        </div>
+        <div>
+          <span>Orbital Period: </span>
+          <span>{data.orbital_period}</span>
+        </div>
+        <div>
+          <span>Rotation Period: </span>
+          <span>{data.rotation_period}</span>
+        </div>
       </div>
     </div>
   );

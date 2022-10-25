@@ -35,6 +35,7 @@ const fetcher = async (url: string) => {
 
 export default function People() {
   const { query } = useRouter();
+  const router = useRouter();
 
   const { data, error } = useSWR(
     () => `https://swapi.dev/api/people/${query.id}`,
@@ -56,43 +57,46 @@ export default function People() {
   }
   
   return (
-    <div>
+    <div className='min-h-screen'>
       <Head>
         <title>{data.name}</title>
         <meta charSet='utf-8' />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <div>
-        <span>Name: </span>
-        <span>{data.name}</span>
-      </div>
-      <div>
-        <span>Height: </span>
-        <span>{data.height}</span>
-      </div>
-      <div>
-        <span>Mass: </span>
-        <span>{data.mass}</span>
-      </div>
-      <div>
-        <span>Hair Color: </span>
-        <span>{data.hair_color}</span>
-      </div>
-      <div>
-        <span>Skin Color: </span>
-        <span>{data.skin_color}</span>
-      </div>
-      <div>
-        <span>Eye Color: </span>
-        <span>{data.eye_color}</span>
-      </div>
-      <div>
-        <span>Birth Year: </span>
-        <span>{data.birth_year}</span>
-      </div>
-      <div>
-        <span>Gender: </span>
-        <span>{data.gender}</span>
+      <span className='text-2xl'><span onClick={() => router.back()} className='text-xl hover:text-sky-400 cursor-pointer'>People</span> >> {data.name}</span>
+      <div className='flex items-center flex-col text-2xl py-5'>
+        <div>
+          <span>Name: </span>
+          <span>{data.name}</span>
+        </div>
+        <div>
+          <span>Height: </span>
+          <span>{data.height}</span>
+        </div>
+        <div>
+          <span>Mass: </span>
+          <span>{data.mass}</span>
+        </div>
+        <div>
+          <span>Hair Color: </span>
+          <span>{data.hair_color}</span>
+        </div>
+        <div>
+          <span>Skin Color: </span>
+          <span>{data.skin_color}</span>
+        </div>
+        <div>
+          <span>Eye Color: </span>
+          <span>{data.eye_color}</span>
+        </div>
+        <div>
+          <span>Birth Year: </span>
+          <span>{data.birth_year}</span>
+        </div>
+        <div>
+          <span>Gender: </span>
+          <span>{data.gender}</span>
+        </div>
       </div>
     </div>
   );
