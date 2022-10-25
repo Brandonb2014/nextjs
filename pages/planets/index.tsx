@@ -5,11 +5,30 @@ import Head from 'next/head';
 import Pagination from '../../components/Pagination';
 import Loading from '../../components/Loading';
 
+type planetDetailResponse = {
+  climate: string,
+  created: string,
+  diameter: string,
+  edited: string,
+  films: [string],
+  gravity: string,
+  name: string,
+  orbital_period: string,
+  population: string,
+  residents: [string],
+  rotation_period: string,
+  surface_water: string,
+  terrain: string,
+  url: string,
+  message: string
+};
+
 type planetResponse = {
   count: number,
   next: string,
   previous: string,
-  results: [string],
+  results: [planetDetailResponse],
+  url: string,
   message: string
 };
 
