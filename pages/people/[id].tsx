@@ -97,7 +97,64 @@ export default function People() {
           <span>Gender: </span>
           <span>{data.gender}</span>
         </div>
+        <div>
+          <span>Films: </span>
+          <span>{FilmsList(data.films)}</span>
+        </div>
+        <div>
+          <span>Species: </span>
+          <span>{data.species}</span>
+        </div>
+        <div>
+          <span>Starships: </span>
+          <span>{data.starships}</span>
+        </div>
+        <div>
+          <span>Vehicles: </span>
+          <span>{data.vehicles}</span>
+        </div>
       </div>
     </div>
   );
+}
+
+const filmFetcher = async (url: string) => {
+  if (url) {
+    const res = await fetch(url);
+    const data = await res.json();
+  console.log('data:', data);
+    if (res.status !== 200) {
+      throw new Error(data.message);
+    }
+    return data;
+  }
+  return '';
+}
+
+function FilmsList(films) {
+  let listOfNames = '';
+
+  films.forEach(film => {
+    const { data, error } = useSWR(
+      () => film,
+      filmFetcher
+    );
+  
+    if (error) {
+      return (
+        <div className='min-h-screen flex justify-center pt-96 text-3xl'>
+          {error.message}
+        </div>
+      );
+    }
+
+    if (!data) {
+      return 'Loading...';
+    }
+
+    listOfNames += (listOfNames !== '' ? ', ' + data.title : data.title);
+    console.log('data:', data);
+  });
+
+  return listOfNames;
 }
