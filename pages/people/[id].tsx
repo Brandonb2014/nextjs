@@ -99,7 +99,7 @@ export default function People() {
         </div>
         <div>
           <span>Films: </span>
-          <span>{FilmsList(data.films)}</span>
+          <span>{data.films}</span>
         </div>
         <div>
           <span>Species: </span>
