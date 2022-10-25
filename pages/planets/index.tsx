@@ -3,6 +3,7 @@ import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import Pagination from '../../components/Pagination';
 import Head from 'next/head';
+import Loading from '../../components/Loading';
 
 const fetcher = async (url: string) => {
   const res = await fetch(url);
@@ -24,35 +25,34 @@ export default function PlanetsList() {
     () => 'https://swapi.dev/api/' + pageName + '/?page=' + page,
     fetcher
   );
-    
+
   if (error) return (
-    <div>
+    <div className='min-h-screen flex justify-center pt-96 text-3xl'>
       {error.message}
     </div>
   )
   if (!data) return (
-    <div>
-      Loading...
-    </div>
+    <Loading />
   )
 
   return (
-    <div>
+    <div className='min-h-screen'>
       <Head>
         <title>Planets</title>
         <meta charSet='utf-8' />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <div>
+      <p className='text-3xl flex justify-center py-5'>
+        Click a planet to get more information.
+      </p>
+      <div className='flex justify-center text-2xl'>
         {data.results.map((planet) => (
-          <>
-            <Link
-              href={'/' + pageNameDash + planet.url.substr(planet.url.indexOf(pageNameDash) + pageNameDash.length)}
-              key={planet.url.substr(planet.url.indexOf(pageNameDash) + pageNameDash.length)}
-            >
-              {planet.name}
-            </Link>
-          </>
+          <Link
+            href={'/' + pageNameDash + planet.url.substr(planet.url.indexOf(pageNameDash) + pageNameDash.length)}
+            key={planet.url.substr(planet.url.indexOf(pageNameDash) + pageNameDash.length)}
+          >
+            <a className='m-5 hover:text-sky-400'>{planet.name}</a>
+          </Link>
         ))}
       </div>
 

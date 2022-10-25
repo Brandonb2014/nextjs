@@ -3,26 +3,26 @@ import Link from 'next/link';
 
 function PreviousPage(currentPage) {
   if (currentPage === 1) {
-    return <span />
+    return <span />;
   }
 
   return (
     <Link href={{ pathname: '/planets', query: { page: currentPage - 1 } }}>
-      Previous
+      <a className='hover:text-sky-400'>Previous</a>
     </Link>
-  )
+  );
 }
 
 function NextPage(currentPage, pageNumbers) {
   if (currentPage === pageNumbers) {
-    return <span />
+    return <span />;
   }
 
   return (
     <Link href={{ pathname: '/planets', query: { page: currentPage + 1 } }}>
-      Next
+      <a className='hover:text-sky-400'>Next</a>
     </Link>
-  )
+  );
 }
 
 const Pagination = ({ pathName, totalPosts, paginate }) => {
@@ -34,16 +34,16 @@ const Pagination = ({ pathName, totalPosts, paginate }) => {
   }
 
   return (
-    <nav>
+    <nav className='flex justify-center text-3xl'>
       {PreviousPage(currentPage)}
       {pageNumbers.map(number => (
         <Link key={number} href={{ pathname: pathName, query: { page: number } }}>
-          {number}
+          <a className='mx-5 hover:text-sky-400'>{number}</a>
         </Link>
       ))}
       {NextPage(currentPage, pageNumbers.length)}
     </nav>
-  )
+  );
 }
 
 export default Pagination;
