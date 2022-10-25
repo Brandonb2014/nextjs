@@ -66,51 +66,51 @@ export default function People() {
       <span className='text-2xl'><span onClick={() => router.back()} className='text-xl hover:text-sky-400 cursor-pointer'>People</span> &gt;&gt; {data.name}</span>
       <div className='flex items-center flex-col text-2xl py-5'>
         <div>
-          <span>Name: </span>
+          <span className='text-orange-800 font-semibold'>Name: </span>
           <span>{data.name}</span>
         </div>
         <div>
-          <span>Height: </span>
+          <span className='text-orange-800 font-semibold'>Height: </span>
           <span>{data.height}</span>
         </div>
         <div>
-          <span>Mass: </span>
+          <span className='text-orange-800 font-semibold'>Mass: </span>
           <span>{data.mass}</span>
         </div>
         <div>
-          <span>Hair Color: </span>
+          <span className='text-orange-800 font-semibold'>Hair Color: </span>
           <span>{data.hair_color}</span>
         </div>
         <div>
-          <span>Skin Color: </span>
+          <span className='text-orange-800 font-semibold'>Skin Color: </span>
           <span>{data.skin_color}</span>
         </div>
         <div>
-          <span>Eye Color: </span>
+          <span className='text-orange-800 font-semibold'>Eye Color: </span>
           <span>{data.eye_color}</span>
         </div>
         <div>
-          <span>Birth Year: </span>
+          <span className='text-orange-800 font-semibold'>Birth Year: </span>
           <span>{data.birth_year}</span>
         </div>
         <div>
-          <span>Gender: </span>
+          <span className='text-orange-800 font-semibold'>Gender: </span>
           <span>{data.gender}</span>
         </div>
         <div>
-          <span>Films: </span>
+          <span className='text-orange-800 font-semibold'>Films: </span>
           <span>{data.films}</span>
         </div>
         <div>
-          <span>Species: </span>
+          <span className='text-orange-800 font-semibold'>Species: </span>
           <span>{data.species}</span>
         </div>
         <div>
-          <span>Starships: </span>
+          <span className='text-orange-800 font-semibold'>Starships: </span>
           <span>{data.starships}</span>
         </div>
         <div>
-          <span>Vehicles: </span>
+          <span className='text-orange-800 font-semibold'>Vehicles: </span>
           <span>{data.vehicles}</span>
         </div>
       </div>

@@ -64,35 +64,35 @@ export default function Planet() {
       <span className='text-2xl'><span onClick={() => router.back()} className='text-xl hover:text-sky-400 cursor-pointer'>Planets</span> &gt;&gt; {data.name}</span>
       <div className='flex items-center flex-col text-2xl py-5'>
         <div>
-          <span>Name: </span>
+          <span className='text-orange-800 font-semibold'>Name: </span>
           <span>{data.name}</span>
         </div>
         <div>
-          <span>Climate: </span>
+          <span className='text-orange-800 font-semibold'>Climate: </span>
           <span>{data.climate}</span>
         </div>
         <div>
-          <span>Surface Water: </span>
+          <span className='text-orange-800 font-semibold'>Surface Water: </span>
           <span>{data.surface_water}</span>
         </div>
         <div>
-          <span>Terrain: </span>
+          <span className='text-orange-800 font-semibold'>Terrain: </span>
           <span>{data.terrain}</span>
         </div>
         <div>
-          <span>Diameter: </span>
+          <span className='text-orange-800 font-semibold'>Diameter: </span>
           <span>{data.diameter}</span>
         </div>
         <div>
-          <span>Gravity: </span>
+          <span className='text-orange-800 font-semibold'>Gravity: </span>
           <span>{data.gravity}</span>
         </div>
         <div>
-          <span>Orbital Period: </span>
+          <span className='text-orange-800 font-semibold'>Orbital Period: </span>
           <span>{data.orbital_period}</span>
         </div>
         <div>
-          <span>Rotation Period: </span>
+          <span className='text-orange-800 font-semibold'>Rotation Period: </span>
           <span>{data.rotation_period}</span>
         </div>
       </div>
