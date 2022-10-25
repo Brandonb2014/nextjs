@@ -63,7 +63,7 @@ export default function People() {
         <meta charSet='utf-8' />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <span className='text-2xl'><span onClick={() => router.back()} className='text-xl hover:text-sky-400 cursor-pointer'>People</span> >> {data.name}</span>
+      <span className='text-2xl'><span onClick={() => router.back()} className='text-xl hover:text-sky-400 cursor-pointer'>People</span> &gt;&gt; {data.name}</span>
       <div className='flex items-center flex-col text-2xl py-5'>
         <div>
           <span>Name: </span>
