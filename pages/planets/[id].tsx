@@ -147,8 +147,8 @@ function residentsList(residents) {
   } else if (residents?.length) {
     return (
       <ul>
-      {residents.map(resident => (
-        <li>
+      {residents.map((resident) => (
+        <li key={resident.name}>
           <Link
             href={'/people/' + resident.url.substr(resident.url.indexOf('people/') + 7)}
             key={resident.url.substr(resident.url.indexOf('people/') + 7)}
