@@ -166,7 +166,7 @@ export default function People() {
           <span className='text-orange-800 font-semibold'>Films:&nbsp;</span>
           <span>
             {loadedRefs.map((film) => {
-              return <p>{film}</p>
+              return <p key={film}>{film}</p>
             })}
           </span>
         </div>
@@ -187,5 +187,7 @@ function homeWorldLink(homeWorld) {
         <a className='hover:text-sky-400'>{homeWorld[0].name}</a>
       </Link>
     );
+  } else {
+    return <span>N/A</span>
   }
 }
