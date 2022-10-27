@@ -1,7 +1,9 @@
+import Link from 'next/link';
 import { useRouter } from "next/router";
 import useSWR from 'swr';
 import Head from 'next/head';
 import Loading from '../../components/Loading';
+import React, { useState, useEffect } from 'react';
 
 type planetDetailResponse = {
   climate: string,
@@ -32,12 +34,40 @@ const fetcher = async (url: string) => {
 }
 
 export default function Planet() {
+  const [loadedRefs, setLoadedRefs] = useState([]);
+
   const { query } = useRouter();
-  const router = useRouter();
+  const page = query.page ?? 1;
 
   const { data, error } = useSWR(
     () => `https://swapi.dev/api/planets/${query.id}`,
     fetcher
+  );
+
+  useEffect(() => {
+    const fetchRefs = async (refs: string[]) => {
+      setLoadedRefs(
+        await Promise.all(
+          refs.map((ref) => 
+            fetch(`${ref}`)
+              .then((resp) => resp.json()).then((resident) => {
+                return {
+                  name: resident.name,
+                  url: resident.url
+                };
+              })
+          )
+        )
+      );
+    }
+
+    if (data?.residents) {
+      setLoadedRefs(['Loading...']);
+      fetchRefs(data.residents);
+    }
+
+    },
+    [ data ]
   );
     
   if (error) {
@@ -54,48 +84,76 @@ export default function Planet() {
     );
   }
   
+  const { name, climate, surface_water, terrain, diameter, gravity, orbital_period, rotation_period } = data;
   return (
     <div className='min-h-screen'>
       <Head>
-        <title>{data.name}</title>
+        <title>{name}</title>
         <meta charSet='utf-8' />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <span className='text-2xl'><span onClick={() => router.back()} className='text-xl hover:text-sky-400 cursor-pointer'>Planets</span> &gt;&gt; {data.name}</span>
+      <span className='text-2xl'>
+        <Link href={{ pathname: '/planets', query: { page: page } }}>
+          <span>
+            <a className='text-xl hover:text-sky-400 cursor-pointer'>Planets</a> &gt;&gt; {name}
+          </span>
+        </Link>
+      </span>
       <div className='flex items-center flex-col text-2xl py-5'>
         <div>
           <span className='text-orange-800 font-semibold'>Name: </span>
-          <span>{data.name}</span>
+          <span>{name}</span>
         </div>
         <div>
           <span className='text-orange-800 font-semibold'>Climate: </span>
-          <span>{data.climate}</span>
+          <span>{climate}</span>
         </div>
         <div>
           <span className='text-orange-800 font-semibold'>Surface Water: </span>
-          <span>{data.surface_water}</span>
+          <span>{surface_water}</span>
         </div>
         <div>
           <span className='text-orange-800 font-semibold'>Terrain: </span>
-          <span>{data.terrain}</span>
+          <span>{terrain}</span>
         </div>
         <div>
           <span className='text-orange-800 font-semibold'>Diameter: </span>
-          <span>{data.diameter}</span>
+          <span>{diameter}</span>
         </div>
         <div>
           <span className='text-orange-800 font-semibold'>Gravity: </span>
-          <span>{data.gravity}</span>
+          <span>{gravity}</span>
         </div>
         <div>
           <span className='text-orange-800 font-semibold'>Orbital Period: </span>
-          <span>{data.orbital_period}</span>
+          <span>{orbital_period}</span>
         </div>
         <div>
           <span className='text-orange-800 font-semibold'>Rotation Period: </span>
-          <span>{data.rotation_period}</span>
+          <span>{rotation_period}</span>
+        </div>
+        <div className='flex'>
+          <span className='text-orange-800 font-semibold'>Residents:&nbsp;</span>
+          {residentsList(loadedRefs)}
         </div>
       </div>
     </div>
   );
+}
+
+function residentsList(residents) {
+  if (residents?.length && residents[0] === 'Loading...') {
+    return <span>Loading...</span>
+  } else if (residents?.length) {
+    return (
+      <Link
+        href={'/people/' + residents[0].url.substr(residents[0].url.indexOf('people/') + 7)}
+        key={residents[0].url.substr(residents[0].url.indexOf('people/') + 7)}
+      >
+        <a className='hover:text-sky-400'>{residents[0].name}</a>
+      </Link>
+    );
+  } else {
+    return <span>N/A</span>
+  }
 }

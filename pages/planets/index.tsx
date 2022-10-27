@@ -80,7 +80,7 @@ export default function PlanetsList() {
       <div className='flex justify-center flex-wrap md:text-2xl py-5'>
         {data.results.map((planet) => (
           <Link
-            href={'/' + pageNameDash + planet.url.substr(planet.url.indexOf(pageNameDash) + pageNameDash.length)}
+            href={{ pathname: '/' + pageNameDash + planet.url.substr(planet.url.indexOf(pageNameDash) + pageNameDash.length), query: { page: page } }}
             key={planet.url.substr(planet.url.indexOf(pageNameDash) + pageNameDash.length)}
           >
             <a className='md:m-5 m-2 hover:text-sky-400'>{planet.name}</a>

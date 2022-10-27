@@ -81,7 +81,7 @@ export default function PeopleList() {
       <div className='flex justify-center flex-wrap md:text-2xl py-5'>
         {data.results.map((person) => (
           <Link
-            href={'/' + pageNameDash + person.url.substr(person.url.indexOf(pageNameDash) + pageNameDash.length)}
+            href={{ pathname: '/' + pageNameDash + person.url.substr(person.url.indexOf(pageNameDash) + pageNameDash.length), query: { page: page } }}
             key={person.url.substr(person.url.indexOf(pageNameDash) + pageNameDash.length)}
           >
             <a className='md:m-5 m-2 hover:text-sky-400'>{person.name}</a>
