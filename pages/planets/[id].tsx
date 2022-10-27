@@ -146,12 +146,18 @@ function residentsList(residents) {
     return <span>Loading...</span>
   } else if (residents?.length) {
     return (
-      <Link
-        href={'/people/' + residents[0].url.substr(residents[0].url.indexOf('people/') + 7)}
-        key={residents[0].url.substr(residents[0].url.indexOf('people/') + 7)}
-      >
-        <a className='hover:text-sky-400'>{residents[0].name}</a>
-      </Link>
+      <ul>
+      {residents.map(resident => (
+        <li>
+          <Link
+            href={'/people/' + resident.url.substr(resident.url.indexOf('people/') + 7)}
+            key={resident.url.substr(resident.url.indexOf('people/') + 7)}
+          >
+            <a className='hover:text-sky-400'>{resident.name}</a>
+          </Link>
+        </li>
+      ))}
+      </ul>
     );
   } else {
     return <span>N/A</span>
